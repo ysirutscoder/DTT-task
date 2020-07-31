@@ -19,6 +19,15 @@ npm run build
 ```
 npm run lint
 ```
+### Docker must be installed to run comands
+
+```
+docker build -t vuejs/testproject 
+
+docker run -p 8080:8080 vuejs/testproject
+
+```
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
