@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,11 +26,14 @@
         </div>
     </nav>
 <!--    adding part where routes will be shown-->
-    <router-view></router-view>
+    <router-view class="mt-7"></router-view>
+
+<Footer/>
 </div>
 </template>
 
 <script>
+    import Footer from "@/components/Footer";
     export default {
     name: 'app',
     movies: [],
@@ -40,5 +43,8 @@
             title: "Recrutment Task"
         }
     },
+        components:{
+        Footer,
+        }
 }
 </script>

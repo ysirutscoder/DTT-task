@@ -14,12 +14,12 @@
                 <h3 class="movie-card--title">{{movie.nameEn}}</h3>
                 <h5 class="movie-card--date">{{movie.year}}</h5>
 <!--                pass film id parametr vie router-->
-                <router-link class="movie-card--link" :to="{name:'details',params:{filmId: movie.filmId}}">Read more</router-link>
+                <router-link class="movie-card--link" :to="{name:'details',params:{filmId: movie.filmId,genre: selectedGenres}}">Read more</router-link>
             </div>
 
         </div>
-
     </div>
+
 </template>
 
 <script>
@@ -185,6 +185,7 @@
                     })
             },
         },
+
         //on create lifecycle hook fetch films ,to be already loaded at mount time
         created(){
             this.fetchFilms()

@@ -1,24 +1,29 @@
 body{
-    background-image: url(assets/cyber-3400789_1280.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
+    background-color: #101031 !important;
+}
+
+nav {
+    background-color: #1c1834;
+    color: white;
+    font-size: 20px;
+    box-shadow: 2px 0 4px orange;
 }
 
 #app{
     font-family: 'Avenir' ,Helvetica;
     text-align: center;
     color:white;
+    width: 100%;
+    min-height: 100vh;
 }
 
 .movie-card {
-    max-width: 220px !important;
+    max-width: 200px !important;
     max-height: 350px;
     border: 2px solid #fe0000;
     border-radius: 20px;
     margin: 5px 10px;
-    background: #887adcad;
+    background: rgba(39, 34, 68, 0.68);
 }
 
 .movie-card:hover {
@@ -33,7 +38,19 @@ body{
 
 .movie-card--img {
     width:70%;
-    max-height: 200px;
+    max-height: 150px;
+}
+
+.movie-card--link {
+    width:100%;
+    color:white;
+    background-color: rgba(66, 65, 65, 0.76);
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+
+.movie-card--link:hover {
+    color:red;
 }
 
 .film-random {
@@ -60,7 +77,7 @@ body{
 }
 
 .film-details--info {
-    margin-top:100px;
+    margin: 60px auto;
 }
 
 .film-details--title {
@@ -73,14 +90,43 @@ body{
     color: lightgrey;
 }
 
+.film-details--img{
+    max-width: 200px;
+    max-height: 250px;
+}
+
 .filter{
     display:flex;
     width:250px;
     background-color: rgba(32, 32, 85, 0.68);
     margin:20px 0;
     padding:10px;
+    border-radius: 20px;
 }
 
+footer{
+    position: absolute;
+    bottom: 0;
+    display:flex !important;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 50px;
+    box-shadow: 2px 0 4px orange;
+    background-color: #1c1834;
+}
+
+.footer-item{
+    font-size: 20px;
+    color:white;
+    margin:0 10px;
+}
+
+.footer-item:hover{
+    font-weight: 600;
+    color: cornflowerblue;
+}
 
 @media screen and (max-width: 576px){
     .film-random{
@@ -93,6 +139,11 @@ body{
         flex-direction: column;
         min-width: 300px;
         margin:10px auto;
+    }
+}
+@media screen and (max-width: 1200px){
+    footer{
+        position: relative;
     }
 }
 

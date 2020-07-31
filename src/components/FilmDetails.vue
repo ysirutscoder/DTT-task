@@ -13,9 +13,10 @@
             </div>
         </div>
 <!--        movies component-->
+        <h2>Related films</h2>
         <div class="row">
-            <div class="movie-card col-sm-12 col-md-4" :key="index" v-for="(movie,index) in movies.slice(0,4)">
-                <img :src="movie.posterUrlPreview" :alt="movie.nameEn" class="movie-card--img">
+            <div class="movie-card col-sm-12 col-md-4" :key="index" v-for="(movie,index) in movies.slice(0,5)">
+                <img :src="movie.posterUrl" :alt="movie.nameEn" class="movie-card--img">
                 <h3 class="movie-card--title">{{movie.nameEn}}</h3>
                 <h5 class="movie-card--date">{{movie.year}}</h5>
                 <router-link  class="movie-card--link" :to="{name:'details',params:{filmId: movie.filmId}}">Read more</router-link>
@@ -26,12 +27,12 @@
 </template>
 
 <script>
-
     export default{
         data(){
             return{
                 //get parametrs from route
                 filmId:this.$route.params.filmId,
+                genre:this.$route.params.genre,
                 film:{},
                 movies:[]
             }
@@ -60,23 +61,35 @@
                 this.fetchFilm(this.filmId);
             },
             //fetching all films , i think i could it put in services but i dont know if it is good practic for Vue
-            fetchFilms(){
-                fetch(" https://kinopoiskapiunofficial.tech/api/v2.1/films/top ",{
+            // fetchFilms(){
+            //     fetch(" https://kinopoiskapiunofficial.tech/api/v2.1/films/top ",{
+            //         method: 'GET',
+            //         headers: {
+            //             "X-API-KEY": '5612cdc8-8f1c-40b9-972a-6af4d1825731'
+            //         }})
+            //         .then(response => response.json())
+            //         .then(data => {
+            //             let result = data.films;
+            //             this.movies = result;
+            //         })
+            // },
+            fetchFilmsByGenre(genre){
+                fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-filters?genre=${genre} `,{
                     method: 'GET',
                     headers: {
                         "X-API-KEY": '5612cdc8-8f1c-40b9-972a-6af4d1825731'
                     }})
-                    .then(response => response.json())
-                    .then(data => {
-                        let result = data.films;
-                        this.movies = result;
+                    .then( response => response.json())
+                    .then (data=> {
+                        let result =  data.films;
+                        this.movies=result;
                     })
             },
         },
         //on create lifecycle hook fetch films ,to be already loaded at mount time
         created(){
              this.fetchFilm(this.filmId)
-            this.fetchFilms()
+            this.fetchFilmsByGenre(this.genre)
          }
     }
 </script>
