@@ -19,7 +19,7 @@
                 <img :src="movie.posterUrl" :alt="movie.nameEn" class="movie-card--img">
                 <h3 class="movie-card--title">{{movie.nameEn}}</h3>
                 <h5 class="movie-card--date">{{movie.year}}</h5>
-                <router-link  class="movie-card--link" :to="{name:'details',params:{filmId: movie.filmId}}">Read more</router-link>
+                <router-link class="movie-card--link" :to="{name:'details',params:{filmId: movie.filmId}}">Read more</router-link>
             </div>
 
         </div>
@@ -38,17 +38,18 @@
             }
         },
         //observing route in order to dynamicly change data
-        watch:{
-            '$route':'change'
+        watch: {
+            '$route': 'change'
         },
-        methods:{
+        methods: {
             // fetching data of film with id given in route params
-            fetchFilm(id){
-                fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/${id}`,{
+            fetchFilm(id) {
+                fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/${id}`, {
                     method: 'GET',
                     headers: {
-                        "X-API-KEY": '5612cdc8-8f1c-40b9-972a-6af4d1825731'
-                    }})
+                        'X-API-KEY': '5612cdc8-8f1c-40b9-972a-6af4d1825731'
+                    }
+                })
                     .then(response => response.json())
                     .then(data => {
                         let res = data.data;
@@ -56,8 +57,8 @@
                     })
             },
             //function which called on route change
-            change(){
-                this.filmId=this.$route.params.filmId;
+            change() {
+                this.filmId = this.$route.params.filmId;
                 this.fetchFilm(this.filmId);
             },
             //fetching all films , i think i could it put in services but i dont know if it is good practic for Vue
