@@ -1,8 +1,28 @@
 import Vue from 'vue'
-import App from './App.vue'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
-Vue.config.productionTip = false
+import App from "@/App";
+import Film from "@/components/Film";
+import Radnom from "@/components/Radnom";
+import FilmDetails from "@/components/FilmDetails";
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+const routes = [
+    {path:'/',redirect:'/main'},
+    {path:'/main',name:'main',component:Film},
+    {path:'/random',name:'random',component: Radnom},
+    {path:'/main/:filmId', name:'details',component: FilmDetails,props:true}
+]
+
+const router = new VueRouter({
+    routes
+})
+
+
+new Vue ({
+    el:'#app',
+    router,
+    render: h=>h(App)
+})
+
+

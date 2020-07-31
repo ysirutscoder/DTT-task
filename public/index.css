@@ -3,4 +3,96 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    min-height: 100vh;
 }
+
+#app{
+    font-family: 'Avenir' ,Helvetica;
+    text-align: center;
+    color:white;
+}
+
+.movie-card {
+    max-width: 220px !important;
+    max-height: 350px;
+    border: 2px solid #fe0000;
+    border-radius: 20px;
+    margin: 5px 10px;
+    background: #887adcad;
+}
+
+.movie-card:hover {
+    border: 2px solid #011efe;
+    box-shadow: 1px 1px 7px aquamarine;
+}
+
+.movie-card--title {
+    font-size: 15px;
+    color: orangered;
+}
+
+.movie-card--img {
+    width:70%;
+    max-height: 200px;
+}
+
+.film-random {
+    width:25%;
+    margin: 10px auto
+}
+.film-random--title {
+     color:black;
+     text-align: center;
+ }
+
+.film-random--date {
+    color:black;
+    text-align: center;
+}
+
+.film-details {
+    display: flex;
+    flex-direction: row;
+    background-color: #0a0a0c;
+    border-radius: 20px;
+    min-width:500px;
+    margin:30px auto;
+}
+
+.film-details--info {
+    margin-top:100px;
+}
+
+.film-details--title {
+    font-size: 25px;
+    color: #fe0000;
+}
+
+.film-details--date {
+    font-size:20px;
+    color: lightgrey;
+}
+
+.filter{
+    display:flex;
+    width:250px;
+    background-color: rgba(32, 32, 85, 0.68);
+    margin:20px 0;
+    padding:10px;
+}
+
+
+@media screen and (max-width: 576px){
+    .film-random{
+        width:70%;
+    }
+    .movie-card {
+        margin: 5px auto;
+    }
+    .film-details {
+        flex-direction: column;
+        min-width: 300px;
+        margin:10px auto;
+    }
+}
+
