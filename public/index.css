@@ -34,6 +34,7 @@ nav {
     border: 2px solid #fe0000;
     border-radius: 20px;
     margin: 5px 10px;
+    padding: 25px 15px;
     background: rgba(39, 34, 68, 0.68);
 }
 
@@ -66,7 +67,8 @@ nav {
 
 .film-random {
     width:25%;
-    margin: 10px auto
+    margin: 10px auto;
+
 }
 .film-random--title {
      color:black;

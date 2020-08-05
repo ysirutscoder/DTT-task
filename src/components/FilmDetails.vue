@@ -15,9 +15,9 @@
 <!--        movies component-->
         <h2>Related films</h2>
         <div class="row">
-            <div class="movie-card col-sm-12 col-md-4" :key="index" v-for="(movie,index) in movies.slice(0,5)">
+            <div class="movie-card col-sm-12 col-md-4" :key="index" v-for="(movie,index) in movies[0].slice(0,3)">
                 <img :src="movie.posterUrl" :alt="movie.nameEn" class="movie-card--img">
-                <h3 class="movie-card--title">{{movie.nameEn}}</h3>
+                <h3 class="movie-card--title" ><span v-if="!!movie.nameEn" >{{ movie.nameEn }}</span><span v-else >{{ movie.nameRu }}</span></h3>
                 <h5 class="movie-card--date">{{movie.year}}</h5>
                 <router-link class="movie-card--link" :to="{name:'details',params:{filmId: movie.filmId}}">Read more</router-link>
             </div>
@@ -27,14 +27,17 @@
 </template>
 
 <script>
+    import MyService from '../share/services'
     export default{
         data(){
             return{
                 //get parametrs from route
+                // API_KEY:process.env.VUE_APP_API_KEY,
                 filmId:this.$route.params.filmId,
                 genre:this.$route.params.genre,
-                film:{},
-                movies:[]
+                films:[],
+                movies:[],
+                film:{}
             }
         },
         //observing route in order to dynamicly change data
@@ -43,54 +46,43 @@
         },
         methods: {
             // fetching data of film with id given in route params
-            fetchFilm(id) {
-                fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/${id}`, {
-                    method: 'GET',
-                    headers: {
-                        'X-API-KEY': '5612cdc8-8f1c-40b9-972a-6af4d1825731'
-                    }
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        let res = data.data;
-                        this.film = res;
-                    })
-            },
+            // fetchFilm(id) {
+            //     fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/${id}`, {
+            //         method: 'GET',
+            //         headers: {
+            //             'X-API-KEY': `${this.API_KEY}`
+            //         }
+            //     })
+            //         .then(response => response.json())
+            //         .then(data => {
+            //             let res = data.data;
+            //             this.film = res;
+            //         })
+            // },
             //function which called on route change
             change() {
                 this.filmId = this.$route.params.filmId;
-                this.fetchFilm(this.filmId);
+                MyService.fetchFilm(this.filmId,this.film);
+                console.log(this.film)
             },
             //fetching all films , i think i could it put in services but i dont know if it is good practic for Vue
-            // fetchFilms(){
-            //     fetch(" https://kinopoiskapiunofficial.tech/api/v2.1/films/top ",{
+            // fetchFilmsByGenre(genre){
+            //     fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-filters?genre=${genre} `,{
             //         method: 'GET',
             //         headers: {
             //             "X-API-KEY": '5612cdc8-8f1c-40b9-972a-6af4d1825731'
             //         }})
-            //         .then(response => response.json())
-            //         .then(data => {
-            //             let result = data.films;
-            //             this.movies = result;
+            //         .then( response => response.json())
+            //         .then (data=> {
+            //             let result =  data.films;
+            //             this.movies=result;
             //         })
             // },
-            fetchFilmsByGenre(genre){
-                fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-filters?genre=${genre} `,{
-                    method: 'GET',
-                    headers: {
-                        "X-API-KEY": '5612cdc8-8f1c-40b9-972a-6af4d1825731'
-                    }})
-                    .then( response => response.json())
-                    .then (data=> {
-                        let result =  data.films;
-                        this.movies=result;
-                    })
-            },
         },
         //on create lifecycle hook fetch films ,to be already loaded at mount time
         created(){
-             this.fetchFilm(this.filmId)
-            this.fetchFilmsByGenre(this.genre)
+             MyService.fetchFilm(this.filmId,this.film)
+             MyService.fetchFilmsByGenre(this.genre,this.movies)
          }
     }
 </script>
