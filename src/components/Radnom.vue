@@ -19,16 +19,22 @@
         },
         methods:{
             //method for fetching fil with special id
-
+            // fetchFilm(id){
+            //     fetch(`https://kinopoiskapiunofficial.tech/api/v2.1/films/${id}`,{
+            //         method: 'GET',
+            //         headers: {
+            //             "X-API-KEY": `${this.API_KEY}`
+            //         }})
+            //         .then(response => response.json())
+            //         .then(data => {
+            //             let res = data.data;
+            //             this.film = res;
+            //         })
+            // },
             //method to fetch random film using Math random functionality
             getRandomFilm(){
                 let random_id=Math.floor(Math.random()*10000)
-                MyService.fetchFilm(random_id)
-                    .then(response => response.json())
-                    .then(data => {
-                        let res = data.data;
-                        this.film = res;
-                    });
+                MyService.fetchFilm(random_id,this.film);
             }
         },
         //on created render first random film
